@@ -85,7 +85,7 @@ class Player(pygame.sprite.Sprite):
         self.move_back = False
         
     def shoot(self):
-        self.bullets.add(Bullet(self.screen, self.x + 50, self.y + 50, self))
+        self.bullets.add(Bullet(self.screen, self.x + 25, self.y + 25, self))
         
        
     
@@ -103,11 +103,6 @@ class Player(pygame.sprite.Sprite):
             self.y += 1
         self.rect = self.image.get_rect(topleft = (self.x, self.y))
         for prep in preps:
-            # if self.rect.colliderect(prep.rect):
-            #     self.move_forw = False
-            #     self.move_back = False
-            #     self.move_left = False
-            #     self.move_right = False
             for y in range(self.rect.top, self.rect.top + self.rect.height):
                 if prep.rect.collidepoint(self.rect.right, y):
                     self.move_right = False
