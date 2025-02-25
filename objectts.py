@@ -103,11 +103,22 @@ class Player(pygame.sprite.Sprite):
             self.y += 1
         self.rect = self.image.get_rect(topleft = (self.x, self.y))
         for prep in preps:
-            if self.rect.colliderect(prep.rect):
-                self.move_forw = False
-                self.move_back = False
-                self.move_left = False
-                self.move_right = False
+            # if self.rect.colliderect(prep.rect):
+            #     self.move_forw = False
+            #     self.move_back = False
+            #     self.move_left = False
+            #     self.move_right = False
+            for y in range(self.rect.top, self.rect.top + self.rect.height):
+                if prep.rect.collidepoint(self.rect.right, y):
+                    self.move_right = False
+                elif prep.rect.collidepoint(self.rect.left, y):
+                    self.move_left = False
+            for x in range(self.rect.left, self.rect.left + self.rect.width):
+                if prep.rect.collidepoint(x, self.rect.top):
+                    self.move_forw = False
+                elif prep.rect.collidepoint(x, self.rect.bottom):
+                    self.move_back = False
+            
         
         
 class Prep(pygame.sprite.Sprite):
