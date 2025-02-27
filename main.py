@@ -2,12 +2,37 @@ import pygame
 
 from objectts import *
 
+prepsmap =[
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+]
+
 cl = pygame.time.Clock()
 pygame.init()
 screen = pygame.display.set_mode((800, 600))
 pl = Player(screen)
 
-preps.add(WPrep(screen, pl.bullets, 350, 250))
+# preps.add(WPrep(screen, pl.bullets, 350, 250))
+
+for prow in prepsmap:
+    for pcoll in prow:
+        if pcoll == 1:
+            preps.add(WPrep(screen, pl.bullets, prow.index(pcoll)*50, prepsmap.index(prow)*50))
+        elif pcoll == 2: 
+            preps.add(SPrep(screen, pl.bullets, prow.index(pcoll)*50, prepsmap.index(prow)*50))
+        elif pcoll == 3:
+            preps.add(MPrep(screen, pl.bullets, prow.index(pcoll)*50, prepsmap.index(prow)*50))
+        
 
 
 def check_events():
