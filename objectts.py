@@ -122,15 +122,13 @@ class Prep(pygame.sprite.Sprite):
         self.x = x
         self.y = y
         self.screen = screen
-        self.health = 3
-        self.image = pygame.image.load('files/prep3.png')
         self.rect = self.image.get_rect(topleft = (x, y))
         self.bullets = bullets
     
     
         
     
-    def update(self):
+    def render(self):
         self.screen.blit(self.image, (self.x, self.y))
         self.rect = self.image.get_rect(topleft = (self.x, self.y))
         
@@ -139,14 +137,47 @@ class Prep(pygame.sprite.Sprite):
                 self.health -= 1
                 bullet.kill()
         
+class MPrep(Prep):
+    def __init__(self, screen, bullets, x = 0, y = 0):
+        self.health = 3
+        self.image = pygame.image.load('files/mprep3.png')
+        super().__init__(screen, bullets, x, y)
+    
+    def update(self):
+        self.render()
         if self.health == 3:
-            self.image = pygame.image.load('files/prep3.png')
+            self.image = pygame.image.load('files/mprep3.png')
         elif self.health == 2:
-            self.image = pygame.image.load('files/prep2.png')
+            self.image = pygame.image.load('files/mprep2.png')
         elif self.health == 1:
-            self.image = pygame.image.load('files/prep1.png')
+            self.image = pygame.image.load('files/mprep1.png')
+        elif self.health == 0:
+            self.kill()
+    
+class SPrep(Prep):
+    def __init__(self, screen, bullets, x = 0, y = 0):
+        self.health = 2
+        self.image = pygame.image.load('files/sprep2.png')
+        super().__init__(screen, bullets, x, y)
+    
+    def update(self):
+        self.render()
+        if self.health == 2:
+            self.image = pygame.image.load('files/sprep2.png')
+        elif self.health == 1:
+            self.image = pygame.image.load('files/sprep1.png')
         elif self.health == 0:
             self.kill()
             
+class WPrep(Prep):
+       
+    def __init__(self, screen, bullets, x = 0, y = 0):
+        self.health = 1
+        self.image = pygame.image.load('files/dprep.png')
+        super().__init__(screen, bullets, x, y)
     
+    def update(self, *args, **kwargs):
+        self.render()
+        if self.health == 0:
+            self.kill()
                 

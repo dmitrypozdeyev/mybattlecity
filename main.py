@@ -7,7 +7,7 @@ pygame.init()
 screen = pygame.display.set_mode((800, 600))
 pl = Player(screen)
 
-preps.add(Prep(screen, pl.bullets, 350, 250))
+preps.add(WPrep(screen, pl.bullets, 350, 250))
 
 
 def check_events():
