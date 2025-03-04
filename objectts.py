@@ -25,12 +25,12 @@ class Bullet(pygame.sprite.Sprite):
             self.y += 5
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, screen, x = 0, y = 0):
+    def __init__(self, screen, color = 'red', x = 0, y = 0):
         super().__init__()
         self.image = pygame.image.load("files/playerforw.png")
         self.rect = self.image.get_rect(topleft = (x, y))
-        self.x = x
-        self.y = y
+        self.x = x * 50
+        self.y = y * 50
         self.screen = screen
         self.move_right = False
         self.move_left = False
@@ -38,6 +38,10 @@ class Player(pygame.sprite.Sprite):
         self.move_back = False
         self.bullets = pygame.sprite.Group()
         self.direction = 'forw'
+        self.color = color
+        self.image.fill(self.color, special_flags=pygame.BLEND_ADD)
+        self.health = 20
+        self.ammo = 30
         
     def rot_right(self):
         self.image = pygame.image.load("files/playerright.png")
@@ -85,7 +89,10 @@ class Player(pygame.sprite.Sprite):
         self.move_back = False
         
     def shoot(self):
-        self.bullets.add(Bullet(self.screen, self.x + 25, self.y + 25, self))
+        if self.ammo > 0:
+            self.bullets.add(Bullet(self.screen, self.x + 25, self.y + 25, self))
+            self.ammo -= 1
+            print(self.ammo)
         
        
     
@@ -113,6 +120,10 @@ class Player(pygame.sprite.Sprite):
                     self.move_forw = False
                 elif prep.rect.collidepoint(x, self.rect.bottom):
                     self.move_back = False
+        self.image.fill(self.color, special_flags=pygame.BLEND_ADD)
+        
+            
+            
             
         
         
@@ -124,6 +135,7 @@ class Prep(pygame.sprite.Sprite):
         self.screen = screen
         self.rect = self.image.get_rect(topleft = (x, y))
         self.bullets = bullets
+        preps.add(self)
     
     
         

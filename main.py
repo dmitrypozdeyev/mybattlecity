@@ -3,9 +3,9 @@ import pygame
 from objectts import *
 
 prepsmap =[
-    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,2,2,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,3,3,0,0,0,0,0,0,0,0,0],
     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
@@ -20,18 +20,17 @@ prepsmap =[
 cl = pygame.time.Clock()
 pygame.init()
 screen = pygame.display.set_mode((800, 600))
-pl = Player(screen)
+pl = Player(screen, color='blue', x=15, y=11)
 
-# preps.add(WPrep(screen, pl.bullets, 350, 250))
 
-for prow in prepsmap:
-    for pcoll in prow:
-        if pcoll == 1:
-            preps.add(WPrep(screen, pl.bullets, prow.index(pcoll)*50, prepsmap.index(prow)*50))
-        elif pcoll == 2: 
-            preps.add(SPrep(screen, pl.bullets, prow.index(pcoll)*50, prepsmap.index(prow)*50))
-        elif pcoll == 3:
-            preps.add(MPrep(screen, pl.bullets, prow.index(pcoll)*50, prepsmap.index(prow)*50))
+for y in range(len(prepsmap)):
+    for x in range(len(prepsmap[y])):
+        if prepsmap[y][x] == 1:
+            WPrep(screen, pl.bullets, x * 50, y * 50)
+        elif prepsmap[y][x] == 2:
+            SPrep(screen, pl.bullets, x * 50, y * 50)
+        elif prepsmap[y][x] == 3:
+            MPrep(screen, pl.bullets, x * 50, y * 50)
         
 
 
