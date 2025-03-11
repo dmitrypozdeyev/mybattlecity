@@ -1,5 +1,6 @@
 import pygame
 preps = pygame.sprite.Group()
+bullets = pygame.sprite.Group()
 
 
 class Bullet(pygame.sprite.Sprite):
@@ -36,7 +37,6 @@ class Player(pygame.sprite.Sprite):
         self.move_left = False
         self.move_forw = False
         self.move_back = False
-        self.bullets = pygame.sprite.Group()
         self.direction = 'forw'
         self.color = color
         self.image.fill(self.color, special_flags=pygame.BLEND_ADD)
@@ -90,7 +90,7 @@ class Player(pygame.sprite.Sprite):
         
     def shoot(self):
         if self.ammo > 0:
-            self.bullets.add(Bullet(self.screen, self.x + 25, self.y + 25, self))
+            bullets.add(Bullet(self.screen, self.x + 25, self.y + 25, self))
             self.ammo -= 1
             print(self.ammo)
         
@@ -128,13 +128,12 @@ class Player(pygame.sprite.Sprite):
         
         
 class Prep(pygame.sprite.Sprite):
-    def __init__(self, screen, bullets, x = 0, y = 0):
+    def __init__(self, screen, x = 0, y = 0):
         super().__init__()
-        self.x = x
-        self.y = y
+        self.x = x * 50
+        self.y = y * 50
         self.screen = screen
         self.rect = self.image.get_rect(topleft = (x, y))
-        self.bullets = bullets
         preps.add(self)
     
     
@@ -144,16 +143,16 @@ class Prep(pygame.sprite.Sprite):
         self.screen.blit(self.image, (self.x, self.y))
         self.rect = self.image.get_rect(topleft = (self.x, self.y))
         
-        for bullet in self.bullets:
+        for bullet in bullets:
             if self.rect.colliderect(bullet.rect):
                 self.health -= 1
                 bullet.kill()
         
 class MPrep(Prep):
-    def __init__(self, screen, bullets, x = 0, y = 0):
+    def __init__(self, screen, x = 0, y = 0):
         self.health = 3
         self.image = pygame.image.load('files/mprep3.png')
-        super().__init__(screen, bullets, x, y)
+        super().__init__(screen, x, y)
     
     def update(self):
         self.render()
@@ -167,10 +166,10 @@ class MPrep(Prep):
             self.kill()
     
 class SPrep(Prep):
-    def __init__(self, screen, bullets, x = 0, y = 0):
+    def __init__(self, screen, x = 0, y = 0):
         self.health = 2
         self.image = pygame.image.load('files/sprep2.png')
-        super().__init__(screen, bullets, x, y)
+        super().__init__(screen, x, y)
     
     def update(self):
         self.render()
@@ -183,10 +182,10 @@ class SPrep(Prep):
             
 class WPrep(Prep):
        
-    def __init__(self, screen, bullets, x = 0, y = 0):
+    def __init__(self, screen, x = 0, y = 0):
         self.health = 1
         self.image = pygame.image.load('files/dprep.png')
-        super().__init__(screen, bullets, x, y)
+        super().__init__(screen, x, y)
     
     def update(self, *args, **kwargs):
         self.render()

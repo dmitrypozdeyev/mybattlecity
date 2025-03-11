@@ -5,7 +5,7 @@ from objectts import *
 prepsmap =[
     [0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0],
     [0,0,0,0,0,2,2,0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,3,3,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,3,3,2,0,0,0,0,0,0,0,0],
     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
@@ -20,17 +20,17 @@ prepsmap =[
 cl = pygame.time.Clock()
 pygame.init()
 screen = pygame.display.set_mode((800, 600))
-pl = Player(screen, color='blue', x=15, y=11)
+pl = Player(screen, color='red', x=15, y=11)
 
 
 for y in range(len(prepsmap)):
     for x in range(len(prepsmap[y])):
         if prepsmap[y][x] == 1:
-            WPrep(screen, pl.bullets, x * 50, y * 50)
+            WPrep(screen, x, y)
         elif prepsmap[y][x] == 2:
-            SPrep(screen, pl.bullets, x * 50, y * 50)
+            SPrep(screen, x, y)
         elif prepsmap[y][x] == 3:
-            MPrep(screen, pl.bullets, x * 50, y * 50)
+            MPrep(screen, x, y)
         
 
 
@@ -68,7 +68,7 @@ def main():
     while run:
         screen.fill((0, 0, 0))
         check_events()
-        pl.bullets.update()
+        bullets.update()
         pl.update()
         preps.update()
         pygame.display.update()
