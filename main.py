@@ -23,6 +23,7 @@ screen = pygame.display.set_mode((800, 600))
 pl1 = Player(screen, color='red', x=15, y=11)
 pl2 = Player(screen, color='blue', x=0, y=11)
 players.add(pl1, pl2)
+pl1gui = GUI(screen, pl1)
 
 
 for y in range(len(prepsmap)):
@@ -93,6 +94,7 @@ def main():
         bullets.update()
         players.update()
         preps.update()
+        pl1gui.update()
         pygame.display.update()
         cl.tick(200)
         
