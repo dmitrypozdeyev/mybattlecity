@@ -20,7 +20,8 @@ prepsmap =[
 cl = pygame.time.Clock()
 pygame.init()
 screen = pygame.display.set_mode((800, 600))
-pl = Player(screen, color='red', x=15, y=11)
+pl1 = Player(screen, color='red', x=15, y=11)
+pl2 = Player(screen, color='blue', x=0, y=11)
 
 
 for y in range(len(prepsmap)):
@@ -41,24 +42,44 @@ def check_events():
             run = False
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP:
-                pl.start_move_forw()
+                pl1.start_move_forw()
             elif event.key == pygame.K_DOWN:
-                pl.start_move_back()
+                pl1.start_move_back()
             elif event.key == pygame.K_LEFT:
-                pl.start_move_left()
+                pl1.start_move_left()
             elif event.key == pygame.K_RIGHT:
-                pl.start_move_right()
+                pl1.start_move_right()
+            elif event.key == pygame.K_RETURN:
+                pl1.shoot()
+            elif event.key == pygame.K_w:
+                pl2.start_move_forw()
+            elif event.key == pygame.K_s:
+                pl2.start_move_back()
+            elif event.key == pygame.K_a:
+                pl2.start_move_left()
+            elif event.key == pygame.K_d:
+                pl2.start_move_right()
             elif event.key == pygame.K_SPACE:
-                pl.shoot()
+                pl2.shoot()
         elif event.type == pygame.KEYUP:
             if event.key == pygame.K_RIGHT:
-                pl.stop_move_right()
+                pl1.stop_move_right()
             elif event.key == pygame.K_LEFT:
-                pl.stop_move_left()
+                pl1.stop_move_left()
             elif event.key == pygame.K_UP:
-                pl.stop_move_forw()
+                pl1.stop_move_forw()
             elif event.key == pygame.K_DOWN:
-                pl.stop_move_back()
+                pl1.stop_move_back()
+            elif event.key == pygame.K_d:
+                pl2.stop_move_right()
+            elif event.key == pygame.K_a:
+                pl2.stop_move_left()
+            elif event.key == pygame.K_w:
+                pl2.stop_move_forw()
+            elif event.key == pygame.K_s:
+                pl2.stop_move_back()
+           
+            
                 
     
 
@@ -69,7 +90,8 @@ def main():
         screen.fill((0, 0, 0))
         check_events()
         bullets.update()
-        pl.update()
+        pl1.update()
+        pl2.update()
         preps.update()
         pygame.display.update()
         cl.tick(200)

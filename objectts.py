@@ -90,9 +90,17 @@ class Player(pygame.sprite.Sprite):
         
     def shoot(self):
         if self.ammo > 0:
-            bullets.add(Bullet(self.screen, self.x + 25, self.y + 25, self))
+            if self.direction == 'forw':
+                bullets.add(Bullet(self.screen, self.x + 25, self.y - 10, self))
+            elif self.direction == 'back':
+                bullets.add(Bullet(self.screen, self.x + 25, self.y + 60, self))
+            elif self.direction == 'right':
+                bullets.add(Bullet(self.screen, self.x + 60, self.y + 25, self))
+            elif self.direction == 'left':
+                bullets.add(Bullet(self.screen, self.x - 10, self.y + 25, self))
             self.ammo -= 1
-            print(self.ammo)
+            print(f"Ammo {self.color} {self.ammo}")
+            
         
        
     
@@ -121,6 +129,15 @@ class Player(pygame.sprite.Sprite):
                 elif prep.rect.collidepoint(x, self.rect.bottom):
                     self.move_back = False
         self.image.fill(self.color, special_flags=pygame.BLEND_ADD)
+        for bullet in bullets:
+            if self.rect.colliderect(bullet.rect):
+                self.health -= 1
+                bullet.kill()
+                print(f'Health {self.color}: {self.health}')
+                if self.health == 0:
+                    self.kill()
+                    print('Game Over')
+    
         
             
             
