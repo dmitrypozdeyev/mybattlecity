@@ -16,12 +16,13 @@ prepsmap =[
     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 ]
-
+players = pygame.sprite.Group()
 cl = pygame.time.Clock()
 pygame.init()
 screen = pygame.display.set_mode((800, 600))
 pl1 = Player(screen, color='red', x=15, y=11)
 pl2 = Player(screen, color='blue', x=0, y=11)
+players.add(pl1, pl2)
 
 
 for y in range(len(prepsmap)):
@@ -90,8 +91,7 @@ def main():
         screen.fill((0, 0, 0))
         check_events()
         bullets.update()
-        pl1.update()
-        pl2.update()
+        players.update()
         preps.update()
         pygame.display.update()
         cl.tick(200)

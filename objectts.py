@@ -208,4 +208,7 @@ class WPrep(Prep):
         self.render()
         if self.health == 0:
             self.kill()
-                
+
+class GUI(pygame.sprite.Sprite):
+    def __init__(self, screen, player, x = 0, y = 0):
+        self.ammofont = pygame.font.Font
