@@ -134,7 +134,7 @@ class Player(pygame.sprite.Sprite):
                 self.health -= 1
                 bullet.kill()
                 print(f'Health {self.color}: {self.health}')
-                if self.health == 0:
+                if self.health < 0:
                     self.kill()
                     print('Game Over')
     
