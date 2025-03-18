@@ -1,6 +1,7 @@
 import pygame
 preps = pygame.sprite.Group()
 bullets = pygame.sprite.Group()
+players = pygame.sprite.Group()
 
 
 class Bullet(pygame.sprite.Sprite):
@@ -42,6 +43,7 @@ class Player(pygame.sprite.Sprite):
         self.image.fill(self.color, special_flags=pygame.BLEND_ADD)
         self.health = 20
         self.ammo = 30
+        self.add(players)
         
     def rot_right(self):
         self.image = pygame.image.load("files/playerright.png")
