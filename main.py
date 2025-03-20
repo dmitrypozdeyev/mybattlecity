@@ -26,7 +26,26 @@ pl2 = Player(screen, color='blue', x=0, y=11)
 pl1gui = GUILeft(screen, pl1)
 pl2gui = GUIRight(screen, pl2, x=600)
         
-        
+def endGame(playername):
+    pygame.draw.rect(screen, (0, 0, 0), (0, 0, 800, 600))
+    fontBig = pygame.font.Font('files/font.ttf', 50)
+    fontSmall = pygame.font.Font('files/font.ttf', 20)
+    mainText = fontBig.render(f"{playername} игрок победил!", False, (255, 255, 255))
+    text = fontSmall.render("Нажмите пробел чтобы начать заново", False, (255, 255, 255))
+    screen.blit(mainText, (400 - mainText.get_width() / 2, 200 ))
+    screen.blit(text, (400 - text.get_width() / 2, 205 + mainText.get_height()))
+    global pl1
+    global pl2
+    global pl1gui
+    global pl2gui
+    for event in pygame.event.get():
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE:
+                players.empty()
+                pl1 = Player(screen, color='red', x=15, y=11)
+                pl2 = Player(screen, color='blue', x=0, y=11)
+                pl1gui = GUILeft(screen, pl1)
+                pl2gui = GUIRight(screen, pl2, x=600)
 
 for y in range(len(prepsmap)):
     for x in range(len(prepsmap[y])):
@@ -98,7 +117,12 @@ def main():
         preps.update()
         pl1gui.update()
         pl2gui.update()
+        if pl1.health == 0:
+            endGame("Второй")
+        elif pl2.health == 0:
+            endGame("Первый")
         pygame.display.update()
+        print(pl1.ammo, pl2.ammo)
         cl.tick(200)
         
                 
