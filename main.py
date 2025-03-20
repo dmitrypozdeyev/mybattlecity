@@ -23,8 +23,10 @@ screen = pygame.display.set_mode((800, 600))
 pl1 = Player(screen, color='red', x=15, y=11)
 pl2 = Player(screen, color='blue', x=0, y=11)
 
-pl1gui = GUI(screen, pl1)
-
+pl1gui = GUILeft(screen, pl1)
+pl2gui = GUIRight(screen, pl2, x=600)
+        
+        
 
 for y in range(len(prepsmap)):
     for x in range(len(prepsmap[y])):
@@ -95,6 +97,7 @@ def main():
         players.update()
         preps.update()
         pl1gui.update()
+        pl2gui.update()
         pygame.display.update()
         cl.tick(200)
         

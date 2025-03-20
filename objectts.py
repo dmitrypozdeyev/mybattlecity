@@ -101,7 +101,6 @@ class Player(pygame.sprite.Sprite):
             elif self.direction == 'left':
                 bullets.add(Bullet(self.screen, self.x - 10, self.y + 25, self))
             self.ammo -= 1
-            print(f"Ammo {self.color} {self.ammo}")
             
         
        
@@ -135,10 +134,8 @@ class Player(pygame.sprite.Sprite):
             if self.rect.colliderect(bullet.rect):
                 self.health -= 1
                 bullet.kill()
-                print(f'Health {self.color}: {self.health}')
                 if self.health <= 0:
                     self.kill()
-                    print('Game Over')
     
         
             
@@ -211,7 +208,7 @@ class WPrep(Prep):
         if self.health == 0:
             self.kill()
 
-class GUI(pygame.sprite.Sprite):
+class GUILeft(pygame.sprite.Sprite):
     def __init__(self, screen, player : Player, x = 0, y = 0):
         self.ammofont = pygame.font.Font('files/font.ttf', 20)
         self.healthbar = pygame.Rect(x, y + 25, 10 * player.health, 20)
@@ -225,4 +222,20 @@ class GUI(pygame.sprite.Sprite):
         self.screen.blit(self.ammofont.render(str(self.player.ammo), False, (255, 255, 255)), (self.x, self.y))
         pygame.draw.rect(self.screen, self.player.color, self.healthbar)
         self.healthbar = pygame.Rect(self.x, self.y + 25, 10 * self.player.health, 20)
+    
+class GUIRight(pygame.sprite.Sprite):
+    def __init__(self, screen, player : Player, x = 0, y = 0):
+        self.ammofont = pygame.font.Font('files/font.ttf', 20)
+        self.healthbar = pygame.Rect(x, y + 25, 10 * player.health, 20)
+        self.screen = screen
+        self.player = player
+        self.x = x
+        self.y = y
+        super().__init__()
+        
+    def update(self):
+        ammocountimage = self.ammofont.render(str(self.player.ammo), False, (255, 255, 255))
+        self.screen.blit(ammocountimage, (self.x + 200 - ammocountimage.get_width(), self.y))
+        pygame.draw.rect(self.screen, self.player.color, self.healthbar)
+        self.healthbar = pygame.Rect(self.x + (200 - self.player.health * 10), self.y + 25, 10 * self.player.health, 20)
         
