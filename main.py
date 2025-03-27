@@ -38,6 +38,7 @@ def endGame(playername):
     global pl2
     global pl1gui
     global pl2gui
+    global bullets
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
@@ -46,17 +47,21 @@ def endGame(playername):
                 pl2 = Player(screen, color='blue', x=0, y=11)
                 pl1gui = GUILeft(screen, pl1)
                 pl2gui = GUIRight(screen, pl2, x=600)
+                bullets.empty()
+                drawPreps(prepsmap)
 
-for y in range(len(prepsmap)):
-    for x in range(len(prepsmap[y])):
-        if prepsmap[y][x] == 1:
-            WPrep(screen, x, y)
-        elif prepsmap[y][x] == 2:
-            SPrep(screen, x, y)
-        elif prepsmap[y][x] == 3:
-            MPrep(screen, x, y)
+def drawPreps(prepsmap):
+    preps.empty()
+    for y in range(len(prepsmap)):
+        for x in range(len(prepsmap[y])):
+            if prepsmap[y][x] == 1:
+                WPrep(screen, x, y)
+            elif prepsmap[y][x] == 2:
+                SPrep(screen, x, y)
+            elif prepsmap[y][x] == 3:
+                MPrep(screen, x, y)
         
-
+drawPreps(prepsmap)
 
 def check_events():
     global run
