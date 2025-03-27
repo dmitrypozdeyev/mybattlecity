@@ -2,6 +2,7 @@ import pygame
 preps = pygame.sprite.Group()
 bullets = pygame.sprite.Group()
 players = pygame.sprite.Group()
+bonus = pygame.sprite.Group()
 
 
 class Bullet(pygame.sprite.Sprite):
@@ -149,7 +150,7 @@ class Prep(pygame.sprite.Sprite):
         self.x = x * 50
         self.y = y * 50
         self.screen = screen
-        self.rect = self.image.get_rect(topleft = (x, y))
+        self.rect = self.image.get_rect(topleft = (self.x, self.y))
         preps.add(self)
     
     
@@ -239,3 +240,22 @@ class GUIRight(pygame.sprite.Sprite):
         pygame.draw.rect(self.screen, self.player.color, self.healthbar)
         self.healthbar = pygame.Rect(self.x + (200 - self.player.health * 10), self.y + 25, 10 * self.player.health, 20)
         
+class Heal(pygame.sprite.Sprite):
+    def __init__(self, screen, x = 0, y = 0):
+        super().__init__()
+        self.x = x * 50
+        self.y = y * 50
+        self.screen = screen
+        self.image = pygame.image.load('files/heal.png')
+        self.rect = self.image.get_rect(topleft = (self.x, self.y))
+        bonus.add(self)
+    
+    def update(self):
+        self.screen.blit(self.image, (self.x, self.y))
+        for player in players:
+            if self.rect.colliderect(player.rect):
+                if player.health < 15:
+                    player.health += 5
+                else: 
+                    player.health = 20
+                self.kill()

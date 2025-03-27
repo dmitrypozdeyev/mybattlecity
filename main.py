@@ -22,7 +22,7 @@ pygame.init()
 screen = pygame.display.set_mode((800, 600))
 pl1 = Player(screen, color='red', x=15, y=11)
 pl2 = Player(screen, color='blue', x=0, y=11)
-
+Heal(screen,x=8)
 pl1gui = GUILeft(screen, pl1)
 pl2gui = GUIRight(screen, pl2, x=600)
         
@@ -122,6 +122,7 @@ def main():
         preps.update()
         pl1gui.update()
         pl2gui.update()
+        bonus.update()
         if pl1.health == 0:
             endGame("Второй")
         elif pl2.health == 0:
