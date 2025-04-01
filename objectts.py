@@ -260,3 +260,19 @@ class Heal(pygame.sprite.Sprite):
                     player.health = 20
                 self.kill()
     
+class AmmoBonus(pygame.sprite.Sprite):
+    def __init__(self, screen, x = 0, y = 0):
+        super().__init__()
+        self.x = x * 50
+        self.y = y * 50
+        self.screen = screen
+        self.image = pygame.image.load('files/ammobonus.png')
+        self.rect = self.image.get_rect(topleft = (self.x, self.y))
+        bonus.add(self)
+    
+    def update(self):
+        self.screen.blit(self.image, (self.x, self.y))
+        for player in players:
+            if self.rect.colliderect(player.rect):
+                player.ammo += 5
+                self.kill()

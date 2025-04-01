@@ -1,4 +1,5 @@
 import pygame
+import random
 
 from objectts import *
 
@@ -22,10 +23,14 @@ pygame.init()
 screen = pygame.display.set_mode((800, 600))
 pl1 = Player(screen, color='red', x=15, y=11)
 pl2 = Player(screen, color='blue', x=0, y=11)
-Heal(screen,x=8)
+
 pl1gui = GUILeft(screen, pl1)
 pl2gui = GUIRight(screen, pl2, x=600)
         
+
+TIMER_EVENT = pygame.USEREVENT + 1
+pygame.time.set_timer(TIMER_EVENT, 15000)
+
 def endGame(playername):
     pygame.draw.rect(screen, (0, 0, 0), (0, 0, 800, 600))
     fontBig = pygame.font.Font('files/font.ttf', 50)
@@ -106,6 +111,9 @@ def check_events():
                 pl2.stop_move_forw()
             elif event.key == pygame.K_s:
                 pl2.stop_move_back()
+        elif event.type == TIMER_EVENT:
+            bonus = random.choice([Heal,AmmoBonus])
+            bonus(screen, x=random.randint(0, 15), y=random.randint(0, 11))
            
             
                 
