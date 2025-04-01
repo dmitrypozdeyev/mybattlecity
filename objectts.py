@@ -259,3 +259,4 @@ class Heal(pygame.sprite.Sprite):
                 else: 
                     player.health = 20
                 self.kill()
+    
