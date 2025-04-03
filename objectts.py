@@ -253,6 +253,7 @@ class Heal(pygame.sprite.Sprite):
         self.screen = screen
         self.image = pygame.image.load('files/heal.png')
         self.rect = self.image.get_rect(topleft = (self.x, self.y))
+        self.takebonussound = pygame.mixer.Sound('files/takebonus.mp3')
         bonus.add(self)
         pygame.mixer.Sound('files/bonusspawn.mp3').play()
     
@@ -260,6 +261,7 @@ class Heal(pygame.sprite.Sprite):
         self.screen.blit(self.image, (self.x, self.y))
         for player in players:
             if self.rect.colliderect(player.rect):
+                self.takebonussound.play()
                 if player.health < 15:
                     player.health += 5
                 else: 
@@ -274,6 +276,7 @@ class AmmoBonus(pygame.sprite.Sprite):
         self.screen = screen
         self.image = pygame.image.load('files/ammobonus.png')
         self.rect = self.image.get_rect(topleft = (self.x, self.y))
+        self.takebonussound = pygame.mixer.Sound('files/takebonus.mp3')
         bonus.add(self)
         pygame.mixer.Sound('files/bonusspawn.mp3').play()
     
@@ -281,5 +284,6 @@ class AmmoBonus(pygame.sprite.Sprite):
         self.screen.blit(self.image, (self.x, self.y))
         for player in players:
             if self.rect.colliderect(player.rect):
+                self.takebonussound.play()
                 player.ammo += 5
                 self.kill()
