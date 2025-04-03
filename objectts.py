@@ -45,6 +45,7 @@ class Player(pygame.sprite.Sprite):
         self.health = 20
         self.ammo = 30
         self.add(players)
+        self.shootsound = pygame.mixer.Sound('files/shoot.mp3')
         
     def rot_right(self):
         self.image = pygame.image.load("files/playerright.png")
@@ -102,6 +103,7 @@ class Player(pygame.sprite.Sprite):
             elif self.direction == 'left':
                 bullets.add(Bullet(self.screen, self.x - 10, self.y + 25, self))
             self.ammo -= 1
+            self.shootsound.play()
             
         
        
