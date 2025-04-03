@@ -14,6 +14,7 @@ class Bullet(pygame.sprite.Sprite):
         self.rect = pygame.Rect(self.x-5, self.y-5, 10, 10)
         self.pl = pl
         self.direction = pl.direction
+        
     
     def update(self):
         self.rect = pygame.Rect(self.x-5, self.y-5, 10, 10)
@@ -139,6 +140,7 @@ class Player(pygame.sprite.Sprite):
                 self.health -= 1
                 bullet.kill()
                 if self.health <= 0:
+                    self.destroedsound.play()
                     self.kill()
     
         
@@ -252,6 +254,7 @@ class Heal(pygame.sprite.Sprite):
         self.image = pygame.image.load('files/heal.png')
         self.rect = self.image.get_rect(topleft = (self.x, self.y))
         bonus.add(self)
+        pygame.mixer.Sound('files/bonusspawn.mp3').play()
     
     def update(self):
         self.screen.blit(self.image, (self.x, self.y))
@@ -272,6 +275,7 @@ class AmmoBonus(pygame.sprite.Sprite):
         self.image = pygame.image.load('files/ammobonus.png')
         self.rect = self.image.get_rect(topleft = (self.x, self.y))
         bonus.add(self)
+        pygame.mixer.Sound('files/bonusspawn.mp3').play()
     
     def update(self):
         self.screen.blit(self.image, (self.x, self.y))
