@@ -56,6 +56,8 @@ def endGame(playername):
                 drawPreps(prepsmap)
 
 def drawPreps(prepsmap):
+    startsuond = pygame.mixer.Sound('files/startlevel.mp3')
+    startsuond.play()
     preps.empty()
     for y in range(len(prepsmap)):
         for x in range(len(prepsmap[y])):

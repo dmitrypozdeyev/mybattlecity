@@ -46,6 +46,7 @@ class Player(pygame.sprite.Sprite):
         self.ammo = 30
         self.add(players)
         self.shootsound = pygame.mixer.Sound('files/shoot.mp3')
+        self.destroedsound = pygame.mixer.Sound('files/destroed.mp3')
         
     def rot_right(self):
         self.image = pygame.image.load("files/playerright.png")
