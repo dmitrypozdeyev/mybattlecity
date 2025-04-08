@@ -140,7 +140,7 @@ def main():
         elif pl2.health == 0:
             endGame("Первый")
         pygame.display.update()
-        cl.tick(200)
+        # cl.tick(200)
         
                 
 if __name__ == "__main__":

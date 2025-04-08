@@ -49,6 +49,7 @@ class Player(pygame.sprite.Sprite):
         self.shootsound = pygame.mixer.Sound('files/shoot.mp3')
         self.destroedsound = pygame.mixer.Sound('files/destroed.mp3')
         self.motorsound = pygame.mixer.Sound('files/motor.mp3')
+        self.damsound = pygame.mixer.Sound('files/tankdam.mp3')
         
     def rot_right(self):
         self.image = pygame.image.load("files/playerright.png")
@@ -69,7 +70,7 @@ class Player(pygame.sprite.Sprite):
     def start_move_right(self):
         self.rot_right()
         self.move_right = True
-        self.motorsound.play()
+        # self.motorsound.play()
 
     def stop_move_right(self):
         self.move_right = False
@@ -78,7 +79,7 @@ class Player(pygame.sprite.Sprite):
     def start_move_left(self):
         self.rot_left()
         self.move_left = True
-        self.motorsound.play()
+        # self.motorsound.play()
 
     def stop_move_left(self):
         self.move_left = False
@@ -88,7 +89,7 @@ class Player(pygame.sprite.Sprite):
     def start_move_forw(self):
         self.rot_forw()
         self.move_forw = True
-        self.motorsound.play()
+        # self.motorsound.play()
 
     def stop_move_forw(self):
         self.move_forw = False
@@ -97,7 +98,7 @@ class Player(pygame.sprite.Sprite):
     def start_move_back(self):
         self.rot_back()
         self.move_back = True
-        self.motorsound.play()
+        # self.motorsound.play()
 
     def stop_move_back(self):
         self.move_back = False
@@ -147,6 +148,7 @@ class Player(pygame.sprite.Sprite):
         for bullet in bullets:
             if self.rect.colliderect(bullet.rect):
                 self.health -= 1
+                self.damsound.play()
                 bullet.kill()
                 if self.health <= 0:
                     self.destroedsound.play()
@@ -173,10 +175,12 @@ class Prep(pygame.sprite.Sprite):
     def render(self):
         self.screen.blit(self.image, (self.x, self.y))
         self.rect = self.image.get_rect(topleft = (self.x, self.y))
+        self.damsound = pygame.mixer.Sound('files/prepdam.mp3')
         
         for bullet in bullets:
             if self.rect.colliderect(bullet.rect):
                 self.health -= 1
+                self.damsound.play()
                 bullet.kill()
         
 class MPrep(Prep):
