@@ -69,31 +69,39 @@ class Player(pygame.sprite.Sprite):
     def start_move_right(self):
         self.rot_right()
         self.move_right = True
+        self.motorsound.play()
 
     def stop_move_right(self):
         self.move_right = False
+        self.motorsound.stop()
         
     def start_move_left(self):
         self.rot_left()
         self.move_left = True
+        self.motorsound.play()
 
     def stop_move_left(self):
         self.move_left = False
+        self.motorsound.stop()
         
     
     def start_move_forw(self):
         self.rot_forw()
         self.move_forw = True
+        self.motorsound.play()
 
     def stop_move_forw(self):
         self.move_forw = False
+        self.motorsound.stop()
         
     def start_move_back(self):
         self.rot_back()
         self.move_back = True
+        self.motorsound.play()
 
     def stop_move_back(self):
         self.move_back = False
+        self.motorsound.stop()
         
     def shoot(self):
         if self.ammo > 0:
