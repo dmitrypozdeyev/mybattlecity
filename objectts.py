@@ -125,13 +125,13 @@ class Player(pygame.sprite.Sprite):
     def update(self):
         self.screen.blit(self.image, (self.x, self.y))
         if self.move_right and self.x <= 800 - self.rect.width: 
-            self.x += 1
+            self.x += 2
         elif self.move_left and self.x >= 0:
-            self.x -= 1
+            self.x -= 2
         elif self.move_forw and self.y >= 0: 
-            self.y -= 1
+            self.y -= 2
         elif self.move_back and self.y <= 600 - self.rect.height:
-            self.y += 1
+            self.y += 2
         self.rect = self.image.get_rect(topleft = (self.x, self.y))
         for prep in preps:
             for y in range(self.rect.top, self.rect.top + self.rect.height):
