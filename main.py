@@ -116,8 +116,10 @@ def check_events():
             elif event.key == pygame.K_s:
                 pl2.stop_move_back()
         elif event.type == TIMER_EVENT:
-            bonus = random.choice([Heal,AmmoBonus])
-            bonus(screen, x=random.randint(0, 15), y=random.randint(0, 11))
+            if len(bonus) < 5:
+                bonustype = random.choice([Heal,AmmoBonus])
+                bonustype(screen, x=random.randint(0, 15), y=random.randint(0, 11))
+                
            
             
                 
@@ -132,9 +134,9 @@ def main():
         bullets.update()
         players.update()
         preps.update()
+        bonus.update()
         pl1gui.update()
         pl2gui.update()
-        bonus.update()
         if pl1.health == 0:
             endGame("Второй")
         elif pl2.health == 0:

@@ -31,7 +31,7 @@ class Bullet(pygame.sprite.Sprite):
 class Player(pygame.sprite.Sprite):
     def __init__(self, screen, color = 'red', x = 0, y = 0):
         super().__init__()
-        self.image = pygame.image.load("files/playerforw.png")
+        self.image = pygame.image.load("files/playerforw.png").convert_alpha()
         self.rect = self.image.get_rect(topleft = (x, y))
         self.x = x * 50
         self.y = y * 50
@@ -186,32 +186,32 @@ class Prep(pygame.sprite.Sprite):
 class MPrep(Prep):
     def __init__(self, screen, x = 0, y = 0):
         self.health = 3
-        self.image = pygame.image.load('files/mprep3.png')
+        self.image = pygame.image.load('files/mprep3.png').convert_alpha()
         super().__init__(screen, x, y)
     
     def update(self):
         self.render()
         if self.health == 3:
-            self.image = pygame.image.load('files/mprep3.png')
+            self.image = pygame.image.load('files/mprep3.png').convert_alpha()
         elif self.health == 2:
-            self.image = pygame.image.load('files/mprep2.png')
+            self.image = pygame.image.load('files/mprep2.png').convert_alpha()
         elif self.health == 1:
-            self.image = pygame.image.load('files/mprep1.png')
+            self.image = pygame.image.load('files/mprep1.png').convert_alpha()
         elif self.health == 0:
             self.kill()
     
 class SPrep(Prep):
     def __init__(self, screen, x = 0, y = 0):
         self.health = 2
-        self.image = pygame.image.load('files/sprep2.png')
+        self.image = pygame.image.load('files/sprep2.png').convert_alpha()
         super().__init__(screen, x, y)
     
     def update(self):
         self.render()
         if self.health == 2:
-            self.image = pygame.image.load('files/sprep2.png')
+            self.image = pygame.image.load('files/sprep2.png').convert_alpha()
         elif self.health == 1:
-            self.image = pygame.image.load('files/sprep1.png')
+            self.image = pygame.image.load('files/sprep1.png').convert_alpha()
         elif self.health == 0:
             self.kill()
             
@@ -219,7 +219,7 @@ class WPrep(Prep):
        
     def __init__(self, screen, x = 0, y = 0):
         self.health = 1
-        self.image = pygame.image.load('files/dprep.png')
+        self.image = pygame.image.load('files/dprep.png').convert_alpha()
         super().__init__(screen, x, y)
     
     def update(self, *args, **kwargs):
@@ -264,7 +264,7 @@ class Heal(pygame.sprite.Sprite):
         self.x = x * 50
         self.y = y * 50
         self.screen = screen
-        self.image = pygame.image.load('files/heal.png')
+        self.image = pygame.image.load('files/heal.png').convert_alpha()
         self.rect = self.image.get_rect(topleft = (self.x, self.y))
         self.takebonussound = pygame.mixer.Sound('files/takebonus.mp3')
         bonus.add(self)
@@ -287,7 +287,7 @@ class AmmoBonus(pygame.sprite.Sprite):
         self.x = x * 50
         self.y = y * 50
         self.screen = screen
-        self.image = pygame.image.load('files/ammobonus.png')
+        self.image = pygame.image.load('files/ammobonus.png').convert_alpha()
         self.rect = self.image.get_rect(topleft = (self.x, self.y))
         self.takebonussound = pygame.mixer.Sound('files/takebonus.mp3')
         bonus.add(self)
